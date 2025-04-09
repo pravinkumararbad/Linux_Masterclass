@@ -1,0 +1,70 @@
+UNIX/LINUX:
+-----------
+People working in DevOps, Hadoop, Testing, Develops/ PL/SQL, ORACLE DBA require to have Linux/Unix understanding.
+90% of rel time applications are hosted on Linux platform.
+
+What we will be covering in this path:
+--------------------------------------
+Part-1: UNIX/LINUX Commands:
+----------------------------
+Topic-1: Overview of Linux/Unix OS
+Topic-2: Unix File System
+Topic-3: Unix Installation
+Topic-4: ls, date and cal commands
+Topic-5: Working with Directories
+Topic-6: Working with Files
+Topic-8: Comparing Files
+Topic-9: Creation of Link Files
+Topic-10: Word count command (wc command)
+Topic-11: Sorting content of the file
+Topic-12: Find unique content in the file by using uniq command
+Topic-13: Input and Output of Commands and Redirection
+Topic-14: Piping
+Topic-15: How to use multiple commands in a single line
+Topic-16: Regular Expressions and Wildcard Characters
+Topic-17: Command Aliasing
+Topic-18: Locate and Find Commands
+Topic-19: Compressionf and Uncomoression of files(tar, gzip, gunzip, bzip2, bunzip2)
+Topic-20: grep commands
+Topic-21: cut commands
+Topic-22: File Permissions
+Topic-23: Working with Editors
+
+Part 2: Shell Scripting / Shell Programming
+-------------------------------------------
+Topic-24: Shell Scripting / Shell Programming
+Topic-25: What is shell script, Sha-Bang and First Script
+Topic-26: Shell Variables
+Topic-27: Variable Substitution and Command Substitution
+Topic-28: Command Line Arguments
+Topic-29: How to read dynamic data from the user
+Topic-30: Operators
+Topic-31: Control Statements
+Topic-32: Arrays
+Topic-33: Shell Script Functions
+Topic-34: Project on Shell Programming
+Topic-35: Stream Editor(SED)
+Topic-36: AWK Programming
+Topic-37: Project on awk programming
+
+Part 3: Linux Administration
+----------------------------
+Topic-38: Job Scheduling with crontab
+Topic-39: User management
+Topic-40: Working with putty,mobaxterm and XShell
+Topic-41: How to customize Open Source Software Code
+Topic-42: Process Management
+Topic-43: Communication Commands ( write, wall, msg, mail)
+          How to use Gmail from the Ubuntu Terminal to send Emails
+Topic-44: Package Management
+Topic-45: Install and Working with MySQL Database
+Topic-46: Working with Java
+Topic-47: Job Control
+Topic-48: nohup command
+Topic-49: at command
+Topic-50: Memory related commands
+Topic-51: Networking commands
+Topic-52: Working with winscp
+Topic-53: Working with Filezilla
+Topic-54: init command
+Topic-55: TopMost important Linux Questions

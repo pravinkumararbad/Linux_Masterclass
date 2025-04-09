@@ -1,0 +1,103 @@
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+Part-1: UNIX/LINUX Commands:
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+Topic-1: Overview of Linux/Unix OS
+
+What is UNIX?
+-------------
+It is an operating system created in 1960s.
+With a lot of extensions and improvements to base version of UNIX, several flavours introduced by organization.
+E.g. RedHat Linux, Ubuntu, Suse, etc.
+
+Characteristics of UNIX:
+------------------------
+1. It is a freeware.
+2. It is a open source software. FOSS (Freeware and Open Source Software)
+3. It is multi user operating system.
+4. It is multi tasking operating system.
+5. It is user friendly and supports both CUI based and GUI.
+6. It is more secure than windows operating system.
+
+Flavours of UNIX:
+-----------------
+As UNIX is open source operating system, multiple flavours are available with lot of extensions and improvements.
+E.g.: Ubuntu, RedHat, Cent OS, Fedora, Slackware, Open Solaris, Kali, SUSE Linux Enterprise Server ( SLSE )
+
+NOTE: distrowatch.com
+
+Components of UNIX:
+-------------------
+There are 2 important components of UNIX
+1. Shell
+2. Kernel
+
+1. Shell
+--------
+User can communicate with Shell, it is an outer layer of OS. User can communicate with Shell only.
+Shell reads commands provided by user.
+Shell will check is it valid command or not.
+Shell will check is it properly used or not.
+If everything is proper, then shell interprets/converts that command into kernel understandable form and handover that to the kernel.
+Shell acts as interface between user and kernel.
+
+2. Kernel
+---------
+Kernel is a core component of UNIX OS.
+Kernel is responsible to execute our commands with the help of hardware components.
+Memory allocation, processor allocation is taken care by the Kernel.
+It acts as interface between shell and hardware components.
+
+
+				 USER/APPLICATION
+				        |
+					  SHELL
+					    |
+					  KERNEL
+					    |
+					 HARDWARE
+					 
+Command Execution Flow:
+-----------------------
+											End User Types a command on Terminal
+											      E.g. touch myFile.txt
+												            |
+															|
+											Command will be submitted to Shell
+											                |
+															|
+									   Shell checks whether this command is valid or  -->  If it is not proper display error message to the terminal
+									    not and whether it is properly used or not                                     |
+										                    |                                                          |
+															|                                                          |
+								 If it is proper, shell interprets that command into Kernel                            |
+								       understandable form and handover to the Kernel                                  |
+										                    |                                                          |
+															|                                                          |
+									  Again $ prompt will be displayed to the terminal, <------------------------------+
+										which indicated ready for the next command.
+										
+Types of Users in Linux:
+------------------------
+There are two types of users:
+1. Normal Users -> $ prompt
+2. Super users/root users -> # prompt
+
+sudo -i ---> switch to super user. <SuperUserDO>
+
+Online UNIX Terminal for practice: http://www.masswerk.at/jsuix
+
+The most commonly used basic commands:
+--------------------------------------
+1. pwd: print working directory
+2. ls: list out all files and directories
+3. mkdir: to make a directory
+4. cd: change directory
+5. touch: to create and empty file
+6. rmdir: to remove a directory
+7. rm: to remove a file
+8. cal: to display the current month calander
+9. date: to display current date and time
+10. help: to display list of available commands
+11. clear: to clear terminal
+12. exit: to logout the session
+13. hello: to display brief system information
