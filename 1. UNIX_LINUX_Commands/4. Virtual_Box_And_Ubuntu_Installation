@@ -1,0 +1,42 @@
+++++++++++++++++++++++++++
+Topic-3: Unix Installation
+++++++++++++++++++++++++++
+
+Step 1: Oracle Virtual Box Installation
+Step 2: Ubuntu Installation
+
+Need of Virtual Box:
+--------------------
+We are currently using windows operating system, on the same machine I want to run another operating system, for this we have to install Virtual Box.
+With the use of this we can install virtual computers without effecting original computer.
+
+To run virtual computer in out system without effecting original computer --> Virtual Box.
+
+Oracle Virtual Box Installation
+-------------------------------
+We can use VMWare ( Paid ) or Oracle Virtual Box ( Free ) for virtualization.
+Download VirtualBox software from virtualbox.org
+
+In this installed virtual box, we ahve to create a virtual computer with Ubuntu OS.
+
+Ubuntu is required so as to created a virtual computer.
+
+Ubuntu Installation
+-------------------
+Download ubuntu from ubuntu.com
+Virtual Box is already installed.
+Ubuntu is already available.
+Create virtual computer in virtual box.
+
+Once Installation is complete for Virtual Machine.
+--------------------------------------------------
+Make settings:
+--------------
+
+General: No need
+System
+	Processor: 2
+Display
+Storage
+	Controller->IDE
+		Choose Ubuntu iso downloaded

@@ -1,2 +1,382 @@
 Topic-2: Unix File System
 -------------------------
+In Linux everything is treated as a file.
+In Linux file extension is not important, based on the content the Linux can identify file type.
+
+All files in the Linux OS are divided into different types:
+-----------------------------------------------------------
+1. Normal Files
+2. Directory Files
+3. Device Files
+
+1. Normal Files / Ordinary Files:
+---------------------------------
+These files contains data. It can be normal text file or binary files (image, video, audio files etc.)
+E.g.: abc.txt, test.sh, test.py, somePic.jpg, Movie.mp4
+
+NOTE: file command is used to check the file type.
+E.g. touch myPic.jpg
+     ls -l myPic.jpg
+	 -rw-r--r-- myPic.jpg
+	 
+	 $file myPic.jpg
+	 --> myPic.jpg: empty [not able to decide type as the file is empty.]
+	 
+	 $gedit myPic.jpg -> Add some character data.
+	 $cat myPic.jpg
+	 --> Some character data.
+	 
+	 $file myPic.jpg
+	 --> myPic.jpg ASCII text 
+	 
+	 $mv myPic.jpg myPicture.pravin --> Renames the file name
+	 $file myPicture.pravin
+	 --> myPicture.pravin ASCII text 
+
+This verifies that even if we provide the file extension as jpg, but if the content is text the file command will return ASCII text.
+This shows in Linux file extension is of no use and is not important.
+
+2. Directory Files:
+-------------------
+Even directories are also treated as files in Linux.
+In Windows we can use windows terminology but in Linux we can use directory terminology.
+Directory contains files and sub directories also.
+
+3. Device Files:
+----------------
+In Linux every device us represented as a file.
+By using this file we can communicate with that device.
+Inside /dev directory all device related files will ve there.
+
+NOTE: terminal is also treated as file.
+E.g. This file represents terminal
+    $tty
+	--> /dev/pts/0
+	
+	Open a new terminal and try the same command.
+	$tty
+	--> /dev/pts/1
+	
+With the file /dev/pts/0 or /dev/pts/1 we can communicate to terminal as terminal is also considered as a file in Linux.
+
+    $ echo "some dummy string"
+	--> some dummy string
+	$ echo "some dummy string" > /dev/pts/1
+	
+Now the output will be shown on the second terminal as we have used terminal one to run the command but redirected it to another terminal using output redirection.
+
+For an interesting example can we clear the terminal2 from terminal1
+   $ clear > /dev/pts/1
+   
+NOTE:
+-----
+ctrl+alt+t: To open the terminal
+ctrl+d: To close the terminal
+
+How to Check a file type:
+-------------------------
+$ls:
+We get lot of files in return in different color how to know the file type based on colors.
+
+In Ubuntu:
+Blue Files: Represents directories
+All Other: All ordinary files.
+    White: Normal Text Files.
+	Green: Executable Files.
+	
+This color based identification can be different based on the flavor of UNIX we are using.
+
+NOTE: We have to use ls command with -l command to know the file type.
+    $ ls -l -> -l [Longlisting]
+	
+The first character represents the type of file:
+d --> directory file
+- --> Ordinary file
+l --> Link file
+
+c --> Character special file
+b --> Block special file
+s --> Socket file
+
+File System Navigation Commands:
+--------------------------------
+- / acts as root for Linux file system.
+
+There are several subdirectories under /
+	-- dev
+	-- bin
+	-- etc
+	-- opt
+	-- home
+There are multiple subdiretories available, inside these there can be multiple subdirectories available.
+
+Follow below commands:
+$ pwd
+/home/ls
+
+cd..
+
+$ pwd
+/home
+
+cd..
+
+$ pwd
+/
+
+$ ls
+bin		etc		lib		mnt		run		swapfile	var		boot	home	lib64	opt		sbin	sys  cdrom (and many more).
+
+$ cd home
+
+IMP: There are some hidden files and hidden directories available under every directory.
+     To make all these directories to be visible we have to use (ls -a) command. -a means all in this scenario.
+	 
+$ ls -a
+
+Every directory contains hidden directories.
+- .  ==> This represents the current directory.
+- .. ==> This represents the parent directory.
+
+Let's understand using an example.
+
+$ pwd
+/home/pravin/Desktop/dir1/dir2
+
+In the above example dir2 is current directory and dir1 is present directory.
+
+Example 1:
+----------
+$ cd .
+$ pwd
+/home/pravin/Desktop/dir1/dir2
+
+Example 2:
+----------
+$ cd ..
+$ pwd
+/home/pravin/Desktop/dir1
+
+Example 3:
+----------
+$ cd ../../..
+$ pwd
+/home
+
+Example 4:
+----------
+$ cd ..
+$ pwd
+/
+
+$ cd ..
+$ pwd
+/
+
+This example clearly shows when we are in root directory, there is no parent directory available for root and the pwd remains the same.
+
+User Directories:
+-----------------
+For every user there is a seperate directory created in the Linux.
+The user directory will be created in the home directory.
+/home/pravin ==> This is a pravin user directory.
+
+VVIMP:  If we are in any directory, if we want to move to user directory there is a shortcut.
+$ cd ~
+$ pwd
+/home/pravin
+
+cd with ~
+---------
+$ cd ~ ==> This will move user to user home directory from pwd.
+
+cd without argument
+-------------------
+$ cd   ==> This will also move to user home directory from pwd.
+
+cd with hyphen
+--------------
+$ cd - ==> This will move to previous working directory from current directory.
+
+++++++++++++++++++++++++++++
+Linux File System Hierarchy:
+++++++++++++++++++++++++++++
+Linux File system has a tree like structure.
+It starts with root(/).
+/ is the topmost directory.
+Root has multiple sub directories.
+
+       /
+       ├── bin        → Essential user binaries
+       ├── boot       → Boot loader files
+       ├── dev        → Device files
+       ├── etc        → System-wide configuration files
+       ├── home       → User home directories
+       ├── lib        → Essential shared libraries
+       ├── lib64      → 64-bit shared libraries
+       ├── media      → Mount point for removable media
+       ├── mnt        → Temporary mount point
+       ├── opt        → Optional add-on applications
+       ├── proc       → Virtual filesystem for process and system info
+       ├── root       → Home directory for the root user
+       ├── run        → Runtime data
+       ├── sbin       → Essential system binaries
+       ├── srv        → Data for services
+       ├── sys        → Virtual filesystem for sysfs
+       ├── tmp        → Temporary files
+       ├── usr        → Secondary hierarchy (user binaries, libraries, docs)
+       │   ├── bin
+       │   ├── lib
+       │   └── share
+       └── var        → Variable data (logs, mail, spool, etc.)
+
++++++++++++++++++++++++++++++++++++++++++
+Let's discuss some important directories:
++++++++++++++++++++++++++++++++++++++++++
+
+1. bin directory:
+-----------------
+bin means binaries.
+It conatins all binary executables related to our linux commands.
+e.g. touch, ls, mkdir, cd, etc.
+
+How to verify these commands are getting called or kept in bin directory.
+$ which touch
+usr/bin/touch
+
+$ which ls
+/bin/touch
+
+$ which mkdir
+/bin/mkdir
+
+NOTE: Some updated commands may reside in usr/bin, and other commands may be residing in bin/
+
+2. sbin directory:
+------------------
+sbin means systembin or secondarybin.
+We have 2 type of users in Linux, normal user and super user.
+
+Normal user usable binary executable commands or files are available in bin directory.
+Super user usable binary executable commands or files are available in sbin directory.
+
+E.g. Disk partitioning, Network Management
+
+3. etc directory:
+-----------------
+This directory contains all system configuration files.
+These configuration files can be used by operating system itself.
+
+/etc/passwd ==> All users information is available in this file.
+/etc/group  ==> All groups information is available in this file.
+/etc/hosts  ==> All networkign related information is available in this file (address and DNS names).
+
+4. tmp directory:
+-----------------
+tmp means temporary directory.
+If any file or directory is needed for temporary purpose, then we should create it under tmp directory.
+These files will be deleted automatically at the time of system shut off.
+
+5. dev directory:
+-----------------
+dev means device.
+Every device in Linux is treated as files.
+All these device related files will be stored inside dev directory.
+By using these files we can communicate with that device.
+
+$ cd dev
+$ ls
+
+e.g.:
+tty    --> Terminal related file.
+fd     --> floppy related file.
+hd     --> hard disk related file.
+ram    --> RAM related file.
+stdin  --> Standard input device file (keyboard).
+stdout --> standard output device file.
+stderr --> standard error output device file.
+
+6. mnt directory:
+-----------------
+mnt means mounting.
+Let's assume we have some external Hard Drive.
+We have to add/attach this external storage file system with the Linux file system.
+This attachment process is called as mounting.
+
+In the old OS the mounting was a manual process. In latest OS this is taken care automatically.
+
+7. media directory:
+-------------------
+The files of automatic mounting will be placed inside media directory.
+
+NOTE: mnt contains manual mounting files, and media contains automatica mounting files.
+
+8. opt directory:
+-----------------
+opt means optional.
+This directory contains all third party software installation files.
+
+9. lib directory:
+-----------------
+lib means library.
+The libraries which are required by our commands and applications is stored in lib directory.
+
+10. var directory:
+------------------
+var means variable data.
+If any data keep on changing such type of variable data will be stored inside var directory.
+e.g.: log  files
+
+11. usr directory:
+------------------
+usr means user. This directory contains all user related softwares.
+e.g. MySQL is available from Linux Vendor.
+
+1st party: Softwares which are in bin
+2nd party: Softwares and updated commands under usr directory, which are provided by vendor.
+3rd party: Softwared under opt directory, and these are not provided by the vendors.
+
+openjdl is available from ubuntu.com -> 2nd party.
+oracle jdk 11 -> 3rd  party.
+
+12. home directory:
+-------------------
+As Linux is a multi user OS.
+For every user a seperate directory will be created to hold his specific data like videos, images, dicuments, etc.
+All these user directories will be stored under home directory.
+
+/home/user1 --> It is called user1 home directory. It contains multiple sub directories like Desktop, Downloads, Movies, Pictures, etc.
+
+13. root directory:
+-------------------
+root directory is subdirectory under Linux systems root directrory (/).
+Here the root subdirectory is not to be confused with root directory of Linux system (/).
+
+What does this root directory contains.
+As  /home/user1 --> It is called user1 home directory.
+
+Similary,
+	/root --> It is home directory of root user.
+
+NOTE: What is the difference between / and root directories?
+- / acts as root for Linux file system. It is a topmost directory of Linux file system.
+- root is subdirectory of /, which acts as home directory for the super user.
+
+14. proc directory:
+-------------------
+proc means process.
+In Linux multiple processes running simultaneously. For each process a unique id will be ther: PID.
+For every process a seperate directory is created to maintain the information related to the process.
+
+e.g.: ps -ef [process status  -entire full]
+
+15. boot directory:
+-------------------
+The files which are required to boot Linux OS.
+
+NOTE:
+OS can file and locate the files very easily.
+For every file system a separate name will be assigned.
+
+ext2, ext2, ext3, XFS are names of Linux file system.
+NTFS, FAT are names of windows file system.
