@@ -1,0 +1,118 @@
+Commands:
+---------
+
+1. ls command (list):
+---------------------
+List out all files and directories provided in the given directory.
+If we are not providing any directory then it will list out in current working directory.
+
+- List all files and directories present under directory dir1.
+  $ ls dir1
+
+- List all files and directories present under current directory.
+  $ ls
+  
+- VVIMP: In Linux we can use manual pages as help also known as man pages.
+  $ man <command>
+  $ man ls
+  
+  $ man ls > ls_doc.txt (redirection)
+
+Various options for ls command:
+-------------------------------
+1. ls:
+   It will list all the files and directories in current working directory in alphabetical order.
+
+2. ls -r
+   It will display all the files and directories in current working directory in reverse alphabetical order.
+
+3. ls -l
+   To display in long listing form.
+   -rw-r--r-- <n> <user/owner name> <group name> <size of file> <created/last mod time> <name of the file>
+   
+   First char describes type of file.
+   Remaining nine chars describe the permissions of the file.
+   <n>: The number of link files
+
+4. ls -t
+   It will display all the files and directories in pwd with respect to creation or last modified time.
+   Most recent will be at the top and old are at bottom.
+
+   VVIMP: ls -l -t / ls -lt: This will combine lost listing with creation / last modified time.
+5. ls -ltr
+   This command will combine all three features, this will take files in long listing form, with creation time from old to latest.
+
+NOTE: We can combine multiple options and order of the options is not important.
+
+6. ls -a
+   This will list all the directories and files in pwd including hidden files.
+   ls | wc -l
+   ls -a | wc -l
+   These commands will definetly give us different output as (ls -a) returns the hidden files aswell.
+
+7. ls -A (almost all)
+   This will list almost all the directories and files in pwd including hidden files except (., ..).
+
+8. ls -F
+   To display all the files by type.
+   /: Directory
+   *: Executable
+   @: Link file
+
+9. ls -f
+   List all files including hidden files, but disable the color conventions.
+
+10. ls -i / ls -ltri
+    To display all files including inode number.
+	inode is index node. Address of location where file attributes are stored.
+	An inode (index node) is a data structure used by Linux filesystems (like ext4) to store information about a file or directory, except its name and actual content.
+	This inode stores:
+    File type, Permissions, Owner (UID), Group (GID), File size, Timestamps, Link count, Disk block pointers
+
+11. ls -R
+    R means recursive.
+
+12. ls -s
+    s means size. Number of blocks used. 1 block means 1 Kb or 4Kb.
+
+13. ls -h / ls -lh
+    h means human readable form.
+	This is meaningful mostly when we are using this with -l. This shows memory size correctly.
+
+14. ls -l /etc | head
+    head is used to show only top 10 lines of the huge file list.
+
+	ls -l /etc | head -20 (This shows top 20 entries)
+	ls -l /etc | head -50 (This shows top 50 entries)
+
+15. ls -l /etc | tail
+    tail is used to show only last 10 lines of the huge file list.
+    
+	ls -l /etc | tail -20 (This shows last 20 entries)
+	ls -l /etc | tail -3 (This shows last 3 entries)
+
+16. ls -l /etc | more
+    List all files in page by page format in forward direction.
+
+17. ls -l /etc | less
+    List all files in page by page format in forward and backward both direction.
+
+
+Exercise:
+---------
+Q: All files including hidden files with their inode numbers?
+   ls -lai or ls -ai
+
+Q: Long listing of all files including hidden files sorted by modification date (oldest to latest).
+   ls -latr
+
+NOTE:
+ls -r
+ls -rt
+
+These two commands are not same as,
+-r will always show the list of files in reverse alphabetical order.
+-rt will always show the list of files in reverse creation or modification time order.
+
+Q: How to identify a hidden file?
+   Hidden file name starts with a (.).

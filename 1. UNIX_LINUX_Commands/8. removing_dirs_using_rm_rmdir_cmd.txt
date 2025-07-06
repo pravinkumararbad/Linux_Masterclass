@@ -1,0 +1,99 @@
+How to remove or delete the directories:
+----------------------------------------
+
+rmdir command:
+--------------
+1. We have to use rmdir to remove directories.
+   rmdir dir1 -> To remove oen directory.
+   rmdir dir1 dir2 dir3 -> To remove multiple directories.
+   
+2. rmdir will only work for empty directories, if the directory is not empty the rmdir command will not work.
+   infodba@PravinUbuntu:~$ mkdir dir1
+   infodba@PravinUbuntu:~$ touch dir1/{a..c}.txt
+   infodba@PravinUbuntu:~$ rmdir dir1
+   rmdir: failed to remove dir1: Directory not empty.
+   
+   infodba@PravinUbuntu:~$ rm -r dir1
+   
+   NOTE: In this scenario, when the directory is not empty we are required to use 'rm' command.
+         rm command can be used to delete files and directories both, but rmdir command will work only for directories
+         and directories should be empty.
+         
+         Whenever we are using rm to remove the directories we must use -r or -R (recursive)
+         
+NOTE: Once we remove a file or directory from Linux env. there is no way to retrieve that file.
+
+Options used for rm command:
+----------------------------
+1. rm -i -> interactive
+   While removing files and directories if we want to have a confirmation we have to use -i option.
+   
+   infodba@PravinUbuntu:~$ rm -ri dir1
+   rm: remove regular empty file 'dir1/a.txt'? y
+   rm: remove regular empty file 'dir1/b.txt'? y
+   rm: remove directory 'dir1'? y
+   
+2. rm -f -> force
+   While removing files and directories, if we do not w ant any error message, then we should use -f.
+   It is opposite to -i option.
+   
+   infodba@PravinUbuntu:~$ rm -r dir1
+   rm: cannot remove 'dir1': No such file or directory.
+   
+   infodba@PravinUbuntu:~$ rm -rf dir1
+   There will not be any error or notification, even if the directory is non existant.
+
+3. rm -v -> verbose
+   If we want to know the sequence ofteh removals on the terminal we should use -v.
+   
+   infodba@PravinUbuntu:~$ rm -rv dir1
+   removed 'dir1/a.txt'
+   removed 'dir1/b.txt'
+   removed 'dir1/c.txt'
+   removed directory 'dir1'
+
+==========================================================================================
+
+QUE: Assume dir1 is an empty directory, which command will remove dir1?
+     rmdir dir1
+     rm -r dir1
+     rm dir1    -> X
+
+QUE: Assume dir1 is a non-empty directory, which commands will remove dir1?
+     rm -r dir1
+     rm -R dir1
+     
+QUE: Assume dir1 is a non-empty directory, and abc.txt us a just text file.
+     rm -r abc.txt dir1
+     
+QUE: How to create a directory pythonClass in the videos  directory within user home directory?
+     mkdir /home/user/videos/pythonClass
+     mkdir ~/videos/pythonClass
+     
+QUE: How to create a directory A and inside of that a directory B  and inside of that a directory C?
+     mkdir -p A/B/C
+     
+QUE: How many directories will be created by running following command?
+     mkdir {a..c}{1..3}
+     9 directories will be created.
+
+QUE: To create a directory named with java classes, is the following command valid?
+     mkdir java classes
+     It is not valid, this will create 2 directories
+     
+     Correct command will be:
+     mkdir 'java classes'
+     
+QUE: Assume dir1, dir2, .., dir10 will this work?
+     rm -r dir{1..10}
+     rmdir dir{1..10}
+     rm -r dir* > This will remove all the directories starting with dir.
+     
+QUE: Assume dir1, dir2, .., dir10 remove only dir2, dir4, dir6.
+     rm -r dir{2,4,6}
+     
+QUE: To remove all empty directories starts with d.
+     rmdir d*
+     
+QUE: To remove all empty directories starts with d and ends with n.
+     rmdir d*n     

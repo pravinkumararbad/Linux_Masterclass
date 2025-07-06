@@ -1,0 +1,159 @@
+Working With Directories:
+-------------------------
+
+1. Creation of directories (mkdir):
+-----------------------------------
+1. infodba@PravinUbuntu:~$ mkdir dir1
+   To create a directory named dir1.
+
+2. infodba@PravinUbuntu:~$ mkdir dir2 dir3
+   To create multiple directories at once.
+   
+3. infodba@PravinUbuntu:~$ mkdir dir1/dir2/dir3
+   In this case only dir3 is created.
+   But make sure dir1 should be already available and in that dir2 should also be available.
+   Else we will get an error: No such file or directory.
+   
+4. infodba@PravinUbuntu:~$ mkdir -p dir1/dir2/dir3
+   Here -p means path of directories.
+   In this case we need not have the directories already created as discussed on last command.
+   This command will create a directory structure as provideded in the path of directories.
+   
+   Verify using: 
+   infodba@PravinUbuntu:~$ ls -R
+   infodba@PravinUbuntu:~$ ls -R dir4
+   
+   If we rerun this will not change the content as the path is already existing:
+   infodba@PravinUbuntu:~$ mkdir -p dir1/dir2/dir3
+   
+QUE: If we  want to create dir0 before dir1 if dir1/dir2/dir3 is already available?
+     There is no direct command we have to create a new dir0.
+    Then we have to use mv command to move the rquired directories under dir0.
+    
+    tree command is used to display the file structure in a tree format.
+    NOTE: May not be pre installed
+        sudo snap install tree
+    
+    e.g.:
+    infodba@PravinUbuntu:~$ tree
+    .
+    ├── dir1
+    │   └── dir2
+    │       └── dir3
+    └── dir4
+        └── dir5
+            └── dir6
+
+    infodba@PravinUbuntu:~$ tree dir1
+    .
+    └── dir1
+        └── dir2
+            └── dir3
+
+----------------------------    
+CASE STUDY: Schedule Manager
+----------------------------
+Soft Devs
+    Aman
+    jan2020, feb2020, ...2021,.2022
+    Anil
+    jan2020, feb2020, ...2021,.2022
+    Suresh
+    jan2020, feb2020, ...2021,.2022
+    Ramesh
+    jan2020, feb2020, ...2021,.2022
+
+In every month folder
+    schedule_1.txt
+    schedule_2.txt
+    .
+    .
+    schedule_31.txt
+    
+Solution:
+    mkdir -> for creating directory
+    touch -> To create files.
+    
+    Novice Approach:
+    ----------------
+    infodba@PravinUbuntu:~$ mkdir SoftDevs
+    infodba@PravinUbuntu:~$ cd SoftDevs
+    infodba@PravinUbuntu:~$ mkdir Aman Anil Suresh Ramesh
+    infodba@PravinUbuntu:~$ cd Aman
+    infodba@PravinUbuntu:~$ mkdir jan2020  feb2020 march2020 .. dec2022
+    .
+    .
+    
+    Advanced Users:
+    ---------------
+    1. Create directories:
+    infodba@PravinUbuntu:~$ mkdir -p SoftDevs/{Aman, Anil, Suresh, Ramesh}/{jan,feb,mar,apr,may,jun,jul,aug,sept,oct,nov,dev}_202{0..2}
+    
+    2. Create schedule files:
+       infodba@PravinUbuntu:~$ touch SoftDevs/{Aman, Anil, Suresh, Ramesh}/{jan,feb,mar,apr,may,jun,jul,aug,sept,oct,nov,dev}_202{0..2}/schedule_{1..31}.txt
+    
+    3. Use tree command and verify the created files.
+    4. remove created dirs and files.
+    infodba@PravinUbuntu:~$ rm -r *
+    
+Exercise:
+1. Create 5 directories names with dir1, dir2 .. dir5. In y these directories create empty files names with a.txt, b.txt,..,z.txt
+   Solution:
+   infodba@PravinUbuntu:~$ mkdir -p Exercise\dir{1..5}
+   infodba@PravinUbuntu:~$ touch Exercise\dir{1..5}\{a..z}.txt
+   
+2. /home/user
+          |
+          +-- x
+          |   |
+          |   +-- x1
+          |   |   |
+          |   |   +-- x11
+          |   |   |
+          |   |   +-- x12
+          |   +-- x2
+          |
+          +-- Y
+              |
+              +-- Y1
+              |   |
+              |   +-- Y11
+              |   |
+              |   +-- Y12
+              +-- Y2
+                         
+                                  /home/user
+                                       |
+                      +----------------+----------------+
+                      |                                 |
+                      x                                 Y
+                 +----+----+                     +----+----+
+                 |         |                     |         |
+                x1        x2                    Y1         Y2
+              +--+--+                         +--+--+
+              |     |                         |     |
+            x11    x12                       Y11   Y12
+
+Solution:
+---------
+    Novice Way:
+    -----------
+    infodba@PravinUbuntu:~$ mkdir x y
+    infodba@PravinUbuntu:~$ cd x
+    infodba@PravinUbuntu:~$ mkdir x1 x2
+    infodba@PravinUbuntu:~$ cd x1
+    infodba@PravinUbuntu:~$ mkdir x11 x12
+    
+    cd ../..
+    infodba@PravinUbuntu:~$ cd y
+    infodba@PravinUbuntu:~$ mkdir y1 y2
+    infodba@PravinUbuntu:~$ cd y1
+    infodba@PravinUbuntu:~$ mkdir y11 y12
+    
+    Advanced Users:
+    ---------------
+    infodba@PravinUbuntu:~$ mkdir -p x/x1/x{1..2} x/x2 y/y1/y1{1,2} y/y2
+    
+QUE: What is the difference between the following 2?
+     mkdir dir1/dir2/dir3 -> Only dir3 is created is path till dir2 is already existing in the system.
+     mkdir -p dir1/dir2/dir3 -> The  entire path will be created using mkdir.

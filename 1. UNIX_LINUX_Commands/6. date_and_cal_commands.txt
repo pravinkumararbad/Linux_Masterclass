@@ -1,0 +1,71 @@
+Date Command:
+-------------
+We can use date command to display date and time.
+
+infodba@PravinUbuntu:~$ date
+Sun Jul 6 pm UTC 2025
+
+Various options:
+----------------
+1. date +%D -> mm/dd/yy
+   infodba@PravinUbuntu:~$ date +%D
+   07/06/25
+
+2. date +%T -> hh:mm::ss
+   infodba@PravinUbuntu:~$ date +%T
+   13:32:32
+
+3. date +%d -> only day value
+   date +%m -> only month value
+   date +%y -> only year value (YY)
+   date +%Y -> only year value (YYYY)
+   
+   infodba@PravinUbuntu:~$ date +%d
+   06
+   
+   infodba@PravinUbuntu:~$ date +%m
+   07
+   
+   infodba@PravinUbuntu:~$ date +%y
+   25
+   
+   infodba@PravinUbuntu:~$ date +%Y
+   2025
+   
+4. date +%H -> Only hour in 24Hr format
+   13
+   
+   date +%M -> Only minutes
+   39
+   
+   date +%S -> Only seconds
+   43
+   
+Know all the available options using man command:
+   infodba@PravinUbuntu:~$ man date
+   
+5. Date required in DD-MM-YYYY
+   infodba@PravinUbuntu:~$ date +%d-%m-%Y
+   06-07-2025
+   
+Exercise: Create an empty fil where file name contains current system date.
+Sol:
+    infodba@PravinUbuntu:~$ touch server_$(date +%d%m%Y) (This is called command substitution)
+    infodba@PravinUbuntu:~$ ls
+    server_06072025
+	
+Calendar Command:
+-----------------
+cal command is used to display current month calendar by default.
+
+NOTE: If cal command is not available and giving error on ubuntu try updating bsdmainutils
+
+Options:
+--------
+1. infodba@PravinUbuntu:~$ cal -> Current Month Calendar.
+2. infodba@PravinUbuntu:~$ cal 2020 -> Display the complete year calendar for 2020.
+3. infodba@PravinUbuntu:~$ cal 1 -> To display complete year calendar.
+4. infodba@PravinUbuntu:~$ cal 9999 -> To display the complete year calendar for 9999. The cal command suppots calendar till 9999.
+5. infodba@PravinUbuntu:~$ cal 10000 -> cal: year 10000 not in range 1..9999
+6. infodba@PravinUbuntu:~$ cal 1 2020 -> Calendar for the month of January for year 2020.
+6. infodba@PravinUbuntu:~$ cal 8 2020 -> Calendar for the month of August for year 2020.

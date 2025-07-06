@@ -1,0 +1,62 @@
+Absolute Path vs Relative path:
+-------------------------------
+
+Absolute Path:
+--------------
+It is the path from root(/) to destination. i.e. it is complete path.
+
+Relative Path:
+--------------
+It is the path from current working directory to destination. It is always with respect to current location.
+
+Let's assume at the location, we have a file test.sh
+/home/user/scripts
+
+Assuming we are in /home/user:
+
+ - ./scripts/test.sh (Relative Path)
+ - scripts/test.sh (Relative Path)
+ 
+ - /home/user/scripts/test.sh (Absolute Path)
+ 
+Let's look at some examples to concretize our understanding:
+------------------------------------------------------------
+
+infodba@PravinUbuntu:~$ mkdir -p x/x1/x1{1,2} x/x2 y/y1/y1{1,2} y/y2
+
+                              /home/user/Desktop
+                                       |
+                      +----------------+----------------+
+                      |                                 |
+                      x                                 y
+                 +----+----+                     +----+----+
+                 |         |                     |         |
+                x1        x2                    y1         y2
+              +--+--+                         +--+--+
+              |     |                         |     |
+            x11    x12                       y11   y12
+            
+e.g.: Assume we are in x11 directory. To change to y2 directory.
+- relative Path: cd ../../../y/y2
+                    ./../../../y/y2
+- Absolute Path: cd /home/user/Desktop/y/y2
+                 cd ~/Desktop/y/y2
+                 
+e.g.: Assume we are in y2 directory. To change to x11?
+- relative Path: cd ../../x/x1/x11
+                    ./../../x/x1/x11
+- Absolute Path: cd /home/user/Desktop/x/x1/x11
+                 cd ~/Desktop/x/x1/x11
+                 
+e.g. Assume we are in x11 directory. To create y21 directory inside y2 without entering
+     into y2 directory.
+- relative Path: mkdir ../../../y/y2/y21
+                 mkdir -p ./../../../y/y2/y21
+- Absolute Path: mkdir  /home/user/Desktop/y/y2/y21
+                 mkdir -p ~/Desktop/y/y2/y21
+                 
+Final Thoughts:
+---------------
+Absolute Path: wrt root location(/)
+Relative Path: wrt current location (.)
+     
