@@ -1,0 +1,129 @@
+Copy Command (CP):
+------------------
+1. To copy content from one file to another file.
+-------------------------------------------------
+If the destination file is not available then cp command itself will create that file.
+If destinatioon file is already available and contains some data then that data will be overwritten with new data
+
+infodba@PravinUbuntu:~$ cp source_file destination_file
+infodba@PravinUbuntu:~$ cp a.txt b.txt
+
+2. To copy multiple files to directories:
+-----------------------------------------
+Here we can specify any number of files. But the destination directory should already be available.
+
+infodba@PravinUbuntu:~$ cp file1 file2 file3 destination_directory
+
+3. To copy all files of one directory to another:
+-------------------------------------------------
+All files present in dir1 should be copied to dir2, the destination directory dir2 must be available.
+
+infodba@PravinUbuntu:~$ cp dir1/* dir2
+
+4. To copy total directory to another directory:
+------------------------------------------------
+infodba@PravinUbuntu:~$ cp dir1 dir3
+cp: -r not speficied; omitting directory dir1
+
+Whenever we are copying total directory we should use -r option.
+infodba@PravinUbuntu:~$ cp -r dir1 dir3
+
+Assume if the dir4 (destination directory) is not available.
+The destination directory will be crated and all files of source directory (dir3) will be copied to destination but not source directory.
+infodba@PravinUbuntu:~$ cp -r dir3 dir4
+
+Result: All files from dir3 will be copied to dir4 but not dir3.
+        This is kind of equivalent to infodba@PravinUbuntu:~$ cp dir1/* dir3
+        
+NOTE: We can not copy directory into itself.
+      infodba@PravinUbuntu:~$ cp -r dir1 dir1
+      cp: cannot copy a directory, 'dir1', into itself, 'dir1/dir1'
+      
+QUE: If I want to copy content from multiple files into a single file.
+     infodba@PravinUbuntu:~$ cp a.txt b.txt c.txt d.txt (not valid)
+     
+     This is not valid scenario when we have multiple files in that scenario the destination location must be a directory.
+     
+     How to achieve this requirement?
+     --------------------------------
+     cp command won't work for this requirement. We need to use cat command.
+     
+Moving and Renaming Command:
+----------------------------
+Moving -> mv
+Rename -> mv
+
+Moving and renaming both the actions can be achieved by using mv command.
+
+1. Renaming of a file:
+----------------------
+infodba@PravinUbuntu:~$ mv oldfile newfile
+infodba@PravinUbuntu:~$ mv a.txt b.txt
+
+Consider we have three files a.txt b.txt c.txt
+
+infodba@PravinUbuntu:~$ mv a.txt a.txt
+mv: 'a.txt' and 'a.txt' are the same file.
+
+infodba@PravinUbuntu:~$ mv a.txt b.txt
+This will rename the a.txt to b.txt and the content in original b.txt will be completely lost.
+
+2. Renaming directories:
+------------------------
+infodba@PravinUbuntu:~$ mv dir1 dir2
+dir1 will be renamed to dir2
+
+3. Moving of  files from one directory to another directory:
+------------------------------------------------------------
+For moving the files from one directory to other the destination directory must be available.
+
+infodba@PravinUbuntu:~$ mv dir1/* dir2
+
+4. Moving total directory to another directory:
+-----------------------------------------------
+The command for moving source directory to destination is same as renaming directory.
+If the destination directory is already available then the total directory will be moved to destination directory.
+If the destination directory not available then it will act as the remaning of the directory.
+
+infodba@PravinUbuntu:~$ mv dir1 dir2
+
+5. Move some selection files to another directory:
+--------------------------------------------------
+infodba@PravinUbuntu:~$ mv a.txt b.txt c.txt dir1
+
+QUE: All the files from dir1 should be copied or moved to dir2 and dir3.
+     There is no single command we have to run two command one for each operation.
+     
+Summary of directory related commands:
+--------------------------------------
+
+mkdir dir1
+mkdir dir1 dir2 dir3
+mkdir dir1/dir2/dir3
+mkdir -p dir1/dir2/dir3
+mkdir dir{1..6}
+
+rmdir dir1
+rmdir dir1 dir2 dir3
+rm -r dir1
+rm -ri dir1
+rm -rf dir1
+rm -rv dir1
+rm -r dir*
+rm -r dir{2..6}
+rm -r dir{2,6}
+
+cp file1.txt file2.txt
+cp file1.txt file2.txt file3.txt dir1 -> dir1 must be available.
+cp dir1/* dir2
+cp -r dir1 dir2
+
+mv file1.txt file2.txt
+mv dir1 dir2 (if dir2 is not unavailable then dir1 will be renamed to dir2)
+mv dir1/* dir2
+mv dir1 dir2 (if dir2 is available then dir1 will be moved to dir2)
+
+cd ..
+cd ~ (pwd will be moved to root)
+cd - (pwd will be moved to Desktop)
+cd   (pwd will be moved to root)
