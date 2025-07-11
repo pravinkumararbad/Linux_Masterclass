@@ -1,0 +1,421 @@
+Working With Files:
+-------------------
+
+1. Creation of Files
+2. Viewing of Files
+3. Copying of Files
+4. Comparison of Files
+5. Renaming of Files
+6. Deleting Files
+7. Creation of hidden files and directories
+8. Creation of link files
+9. Editing of files
+
+1. Creation of Files
+--------------------
+In Linux, we can create files in multiple ways.
+
+a. By using cat command
+b. By using touch command
+c. By using editors like, gedit, vi, nano etc.
+
+a. By using cat command
+-----------------------
+cat command can be used to create a file with some content.
+If file1.txt is not already present, then a new file will be created and  the provided data will be written to file.
+
+>:  Redirection Symbol
+
+
+CASE 1: Create and add content in a file.
+        infodba@PravinUbuntu:~/Desktop$ cat > file1.txt
+        line-1
+        line-2
+        line-3
+        Ctrl+d -> To save and come out of processing command.
+
+CASE 2: View the content of a existing file.
+        infodba@PravinUbuntu:~/Desktop$ cat > file1.txt
+        line-1
+        line-2
+        line-3
+
+CASE 3: If the file1.txt is already available, then the data will be overwritten.
+        infodba@PravinUbuntu:~/Desktop$ cat > file1.txt 
+        Mango
+        Apple
+        Orange
+
+        infodba@PravinUbuntu:~/Desktop$ cat file1.txt 
+        Mango
+        Apple
+        Orange
+
+CASE 4: If the file1.txt is already available, and we want to append the data.
+        infodba@PravinUbuntu:~/Desktop$ cat >> file1.txt 
+        Grapes
+        
+        infodba@PravinUbuntu:~/Desktop$ cat file1.txt 
+        Mango
+        Apple
+        Orange
+        Grapes
+
+b. By using touch command
+-------------------------
+The main objectives of the touch commands are:
+1. We can use touch command to create an empty file.
+2. To change timestamp of an existing file, surprisingly this functionality also works for the directory.
+
+CASE 1: Create and verify new empty file is created.
+        infodba@PravinUbuntu:~/Desktop$ touch file1.txt
+        infodba@PravinUbuntu:~/Desktop$ ls -l
+        total 0
+        -rw-rw-r-- 1 infodba infodba 0 Jul  9 17:33 file1.txt
+
+QUE: If we are using touch command to create file,
+     but if file is already there with some content what will happen?
+     
+CASE 2: Nothing will happen to file and content, but the timestamp will be updated.
+        infodba@PravinUbuntu:~/Desktop$ ls -l
+        total 4
+        -rw-rw-r-- 1 infodba infodba 34 Jul  9 17:37 file1.txt
+        infodba@PravinUbuntu:~/Desktop$ touch file1.txt 
+        infodba@PravinUbuntu:~/Desktop$ ls -l
+        total 4
+        -rw-rw-r-- 1 infodba infodba 34 Jul  9 17:39 file1.txt
+
+c. By using editors like, gedit, vi, nano etc.
+----------------------------------------------
+gedit: Using Ctrl+S, Ctrl+Q
+------
+infodba@PravinUbuntu:~/Desktop$ gedit file2.txt
+
+vi editor:
+----------
+infodba@PravinUbuntu:~/Desktop$ vi file3.txt
+    Editor will be opened in command mode.
+    Press i for insert mode
+    Add required data
+    Press esc key to enter into command mode from insert mode
+    press :wq to save and exit
+
+nano editor:
+------------
+save: ctrl+o
+exit: ctrl+x
+infodba@PravinUbuntu:~/Desktop$ nano file4.txt
+
+2. Viewing of Files
+-------------------
+We can view the content of file by using the following commands.
+
+a. cat
+b. tac
+c. rev
+d. head
+e. tail
+f. more
+g. less
+
+a. View content using cat command:
+----------------------------------
+CASE : <: input redirection (This is optional)
+    infodba@PravinUbuntu:~/Desktop$ cat file1.txt
+    infodba@PravinUbuntu:~/Desktop$ cat < file1.txt
+
+CASE 2: While displaying data if we want line numbers, we have to use -noption.
+    infodba@PravinUbuntu:~/Desktop$ cat -n < file1.txt
+         1	First Line
+         2	Second Line
+         3
+         4	Third Line
+         5
+         6  Why not make changes
+
+CASE 3: While viewing content if we want to skip blank lines use option -b.
+    infodba@PravinUbuntu:~/Desktop$ cat -nb < file1.txt
+    nfodba@PravinUbuntu:~/Desktop$ cat -nb file1.txt
+     1	First Line
+     2	Second Line
+
+     3	Third Line
+
+     4	Why not make changes
+
+CASE 4: To view multiple file content simultaneously.
+    infodba@PravinUbuntu:~/Desktop$ cat file1.txt file2.txt file3.txt
+
+Various utilities of cat command:
+---------------------------------
+1. Create a new file with some content.
+    infodba@PravinUbuntu:~/Desktop$ cat > file1.txt
+    Add some data.
+    ctrl_d -> save and exit
+
+2. To append some extra data to an existing file.
+    infodba@PravinUbuntu:~/Desktop$ cat >> file1.txt
+    Add some moew data.
+    ctrl_d -> save and exit
+
+3. To view content of the file.
+    infodba@PravinUbuntu:~/Desktop$ cat < file1.txt  OR  cat file1.txt
+
+4. To copy content of one file to another file.
+    infodba@PravinUbuntu:~/Desktop$ cp file1.txt file2.txt
+    infodba@PravinUbuntu:~/Desktop$ cat file1.txt -> Show data
+    infodba@PravinUbuntu:~/Desktop$ cat file1.txt > file2.txt -> Copies the data from file1.txt to file2.txt
+
+5. To append one file content other file
+    infodba@PravinUbuntu:~/Desktop$ cat file1.txt >> file2.txt
+
+6. Copy content from multiple files to a single output file.
+    infodba@PravinUbuntu:~/Desktop$ cat a.txt b.txt c.txt d.txt > output.txt
+    
+7. Append content from multiple files to a single output file.
+    infodba@PravinUbuntu:~/Desktop$ cat a.txt b.txt c.txt d.txt >> output.txt
+
+
+b. View content using tac command:
+----------------------------------
+It is reverese of cat.
+It will display file content in reverse order of line.
+This is a vertical reversal.
+    infodba@PravinUbuntu:~/Desktop$ gedit a.txt
+    infodba@PravinUbuntu:~/Desktop$ cat a.txt
+    ABC
+    DEF
+    GHI
+    JKL
+    MNO
+    infodba@PravinUbuntu:~/Desktop$ tac a.txt
+    MNO
+    JKL
+    GHI
+    DEF
+    ABC
+
+c. View content using rev command:
+----------------------------------
+rev means reversal
+Here each line will be reversed.
+It is horizonal reversal
+    infodba@PravinUbuntu:~/Desktop$ gedit a.txt
+    infodba@PravinUbuntu:~/Desktop$ cat a.txt
+    ABC
+    DEF
+    GHI
+    JKL
+    MNO
+    infodba@PravinUbuntu:~/Desktop$ rev a.txt
+    CBA
+    FEB
+    IHG
+    LKJ
+    ONM
+
+d. View content using head command:
+-----------------------------------
+cat command will display total content of file at a time. It is best suited for small files.
+If the file contains thousanda of lines it is not recommended to use cat command, and should use head, tail, more, and less commands.
+
+To view specified number of lines from top of the file we use head command.
+10 is the default value for the head command.
+When we read a file using head command 10 lines by default will be shown.
+
+    infodba@PravinUbuntu:~/Desktop$ gedit a.txt 
+    infodba@PravinUbuntu:~/Desktop$ cat a.txt 
+    Line 1
+    Line 2
+    Line 3
+    Line 4
+    Line 5
+    Line 6
+    Line 7
+    Line 8
+    Line 9
+    Line 10
+    Line 11
+    Line 12
+    Line 13
+    Line 14
+    Line 15
+    Line 16
+    Line 17
+    Line 18
+    Line 19
+    Line 10
+    Line 21
+    Line 22
+    Line 23
+    Line 24
+    Line 25
+    Line 26
+    Line 27
+    Line 28
+    Line 29
+    Line 30
+    infodba@PravinUbuntu:~/Desktop$ head a.txt 
+    Line 1
+    Line 2
+    Line 3
+    Line 4
+    Line 5
+    Line 6
+    Line 7
+    Line 8
+    Line 9
+    Line 10
+
+If we want to see customized head lines. We have to use -n option.
+Below example will display only top 5 lines
+    infodba@PravinUbuntu:~/Desktop$ head -5 a.txt
+    Line 1
+    Line 2
+    Line 3
+    Line 4
+    Line 5
+    infodba@PravinUbuntu:~/Desktop$ head -n 5 a.txt 
+    Line 1
+    Line 2
+    Line 3
+    Line 4
+    Line 5
+
+What will happen?
+With this option the command will show a.txt file content except last 15 lines.
+We can customize how many lines we do not want to show.
+    infodba@PravinUbuntu:~/Desktop$ head -n -15 a.txt 
+    Line 1
+    Line 2
+    Line 3
+    Line 4
+    Line 5
+    Line 6
+    Line 7
+    Line 8
+    Line 9
+    Line 10
+    Line 11
+    Line 12
+    Line 13
+    Line 14
+    Line 15
+    
+To display the first customized number of characters in the file. We use -c option.
+    infodba@PravinUbuntu:~/Desktop$ head -c 25 a.txt 
+    Line 1
+    Line 2
+    Line 3
+
+With the -c option with negative value, we can show entire file content except last 200 chars.
+    infodba@PravinUbuntu:~/Desktop$ head -c -200 a.txt 
+    Line 1
+    Line 2
+    Line 3
+    Line 4
+
+e. View content using tail command:
+-----------------------------------
+To view file content from bottom of the file, we use tail command.
+This command is opposite to the head command.
+    infodba@PravinUbuntu:~/Desktop$ tail a.txt 
+    Line 21
+    Line 22
+    Line 23
+    Line 24
+    Line 25
+    Line 26
+    Line 27
+    Line 28
+    Line 29
+    Line 30
+
+    infodba@PravinUbuntu:~/Desktop$ tail -n 5 a.txt 
+    Line 26
+    Line 27
+    Line 28
+    Line 29
+    Line 30
+    
+    infodba@PravinUbuntu:~/Desktop$ tail -c -29 a.txt 
+    e 27
+    Line 28
+    Line 29
+    Line 30
+    
+QUE: Assume file contains enough data and write a command to display data from 3rd line to 7th line.
+     We have to combine two commands.
+     
+     STEP 1: Get the 7 lines from a.txt
+     infodba@PravinUbuntu:~/Desktop$ head -n 7 a.txt 
+     Line 1
+     Line 2
+     Line 3
+     Line 4
+     Line 5
+     Line 6
+     Line 7
+
+     STEP 2: On the first command result, apply
+     infodba@PravinUbuntu:~/Desktop$ tail -n -5
+     
+     Result using piping:
+     --------------------
+     infodba@PravinUbuntu:~/Desktop$ head -n 7 a.txt | tail -n -5
+     Line 3
+     Line 4
+     Line 5
+     Line 6
+     Line 7
+     
+QUE: Try similar thing for line 15th to 23rd
+     infodba@PravinUbuntu:~/Desktop$ head -n 23 a.txt | tail -n 9
+     Line 15
+     Line 16
+     Line 17
+     Line 18
+     Line 19
+     Line 10
+     Line 21
+     Line 22
+     Line 23
+    
+f. View content using more command:
+-----------------------------------
+We can use more command to view file content page by page.
+Usage: 1
+--------
+    infodba@PravinUbuntu:~/Desktop$ man ls > abc.txt
+    infodba@PravinUbuntu:~/Desktop$ more abc.txt
+    
+    Enter --> Next line will  be displayed.
+    Space bar --> Next page will be displayed.
+    q --> Quit and Exit
+
+Usage: 2
+--------
+    infodba@PravinUbuntu:~/Desktop$ man ls > abc.txt
+    infodba@PravinUbuntu:~/Desktop$ more -d abc.txt
+    
+    -d --> This means providing details.
+    --More--(7%)[Press space to continue, 'q' to quit.]
+
+f. View content using less command:
+-----------------------------------
+When compared with more command, less command is more powerful.
+By using more command we can view file content page by page only in forward direction.
+If we want to view file content page by page either in forward or backward direction then we should use less command.
+
+    infodba@PravinUbuntu:~/Desktop$ less abc.txt
+    d --> Go to next page (Down)
+    b --> Go to prev page (Backward)
+    p --> Go to top.
+    q --> Quit
+
+Realtime usage of these command:
+--------------------------------
+1. infodba@PravinUbuntu:~/Desktop$ ls -l /dev | wc -l
+   209
+2. infodba@PravinUbuntu:~/Desktop$ ls -l /dev | more
+3. infodba@PravinUbuntu:~/Desktop$ ls -l /dev | less
