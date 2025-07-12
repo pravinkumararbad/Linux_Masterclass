@@ -1,0 +1,73 @@
+Word Count (wc) command:
+------------------------
+We can use wc command for counting number of words, lines, and characters present in a given file.
+
+Syntax:
+-------
+$ wc filename
+  no_of_lines no_of_words no_of_characters filename
+
+Example:
+--------
+infodba@PravinUbuntu:~$ gedit file1.txt
+  
+infodba@PravinUbuntu:~$  cat file1.txt 
+Mango is king of fruits.
+Linux is very fun to use.
+Python is useful for task involving maths.
+I am trying to learn React.
+
+infodba@PravinUbuntu:~$ wc file1.txt 
+  4  24 122 file1.txt
+
+4 - no_of_lines
+24 - no_of_words
+122 - no_of_characters (no of bytes or filesize)
+file1.txt - filename
+
+Verifying file size.
+infodba@PravinUbuntu:~$ ls -li
+total 12
+393239 drwxrwxr-x 3 infodba infodba 4096 Jul 12 21:36 dir1
+393250 -rw-rw-r-- 1 infodba infodba  122 Jul 12 22:00 file1.txt
+
+Options available for wc command:
+---------------------------------
+-l -> To print only number of lines
+infodba@PravinUbuntu:~$ wc -l file1.txt 
+4 file1.txt
+
+-w -> To print only number of words
+infodba@PravinUbuntu:~$ wc -w file1.txt 
+24 file1.txt
+
+-c -> To print only number of chars
+infodba@PravinUbuntu:~$ wc -c file1.txt
+122 file1.txt
+
+-lw -> To print only number of lines and words
+infodba@PravinUbuntu:~$ wc -lw file1.txt
+  4  24 file1.txt
+
+-lc -> To print only number of lines and chars
+infodba@PravinUbuntu:~$ wc -lc file1.txt
+  4 122 file1.txt
+
+-wc -> To print only number of words and chars
+infodba@PravinUbuntu:~$ wc -wc file1.txt
+ 24 122 file1.txt
+
+-L -> To print number of chars present in longest line
+infodba@PravinUbuntu:~$ wc -L file1.txt
+42 file1.txt
+
+Can we can use wc command for multiple files simultaneously?
+- Yes, we can.
+
+  infodba@PravinUbuntu:~$ cp file1.txt file2.txt
+  infodba@PravinUbuntu:~$ gedit file3.txt
+  infodba@PravinUbuntu:~$ wc file1.txt file2.txt file3.txt 
+    4  24 122 file1.txt
+    4  24 122 file2.txt
+    2   7  46 file3.txt
+   10  55 290 total
