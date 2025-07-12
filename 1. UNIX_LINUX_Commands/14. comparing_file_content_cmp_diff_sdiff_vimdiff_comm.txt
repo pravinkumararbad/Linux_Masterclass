@@ -1,0 +1,189 @@
+Comparing File Content:
+-----------------------
+We can compare data of two files by using following commands.
+
+1. cmp
+2. diff
+3. sdiff
+4. vidiff
+5. comm
+
+1. cmp command:
+---------------
+It will compare files byte by byte.
+
+syntax:
+-------
+cmp file1.txt file2.txt
+If the content is same then we do not get any output.
+If content is different, then it provides information about only first difference byte number and line number is provided.
+
+Example:
+--------
+Comparing Same File:
+--------------------
+infodba@PravinUbuntu:~$ gedit file1.txt
+infodba@PravinUbuntu:~$ cat file1.txt 
+First Line
+Second Line
+Third Line
+infodba@PravinUbuntu:~$ cp file1.txt file2.txt
+infodba@PravinUbuntu:~$ cmp file1.txt file2.txt 
+infodba@PravinUbuntu:~$
+
+Comparing Diff File:
+--------------------
+infodba@PravinUbuntu:~$ gedit file2.txt 
+infodba@PravinUbuntu:~$ cat file2.txt 
+First Line
+Second Line
+Third Line
+Something
+infodba@PravinUbuntu:~$ cmp file1.txt file2.txt
+cmp: EOF on file1.txt after byte 34, line 3
+
+infodba@PravinUbuntu:~$ gedit file1.txt 
+infodba@PravinUbuntu:~$ cat file1.txt 
+First Line
+Second Line
+Third Line
+Some
+infodba@PravinUbuntu:~$ cmp file1.txt file2.txt
+file1.txt file2.txt differ: byte 39, line 4
+
+NOTE: cmp command will not show all differences and it will only show first difference.
+
+2. diff command:
+----------------
+diff command will be used to compare two files to show all the differences.
+
+Syntax:
+-------
+diff file1.txt file2.txt
+
+There is no output if the content in both the files is same.
+If the content is different it shows all the differences.
+
+Example:
+--------
+infodba@PravinUbuntu:~$ cmp file1.txt file1.txt 
+infodba@PravinUbuntu:~$ diff file1.txt file2.txt 
+4c4
+< Some
+---
+> Something
+
+4c4 denotes (first file line change second file line)
+
+Options for diff command:
+-------------------------
+-q -> Shows message if file is different
+-s -> shows message if the file is same or identical.
+-y -> shows comparison line by line (parallel comparison).
+
+infodba@PravinUbuntu:~$ cp file1.txt file2.txt 
+infodba@PravinUbuntu:~$ cp file1.txt file3.txt
+infodba@PravinUbuntu:~$ gedit file3.txt 
+infodba@PravinUbuntu:~$ cat file3.txt 
+First Line
+Second Line
+Third Line
+Some
+thing
+
+option -q:
+----------
+infodba@PravinUbuntu:~$ diff file1.txt file3.txt -q
+Files file1.txt and file3.txt differ
+
+option -s:
+----------
+infodba@PravinUbuntu:~$ diff file1.txt file2.txt -s
+Files file1.txt and file2.txt are identical
+
+option -y:
+----------
+infodba@PravinUbuntu:~$ diff file1.txt file3.txt -y
+First Line							First Line
+Second Line							Second Line
+Third Line							Third Line
+Some								Some
+							      >	thing
+
+We can use --seuppress-common-lines with -y to suppress common lines:
+---------------------------------------------------------------------
+infodba@PravinUbuntu:~$ diff file1.txt file3.txt -y --suppress-common-lines
+							      >	thing
+                                  
+3. sdiff command:
+-----------------
+Here s means side by side comparison.
+This is as good as using -y option with diff command.
+
+syntax and example:
+-------------------
+infodba@PravinUbuntu:~$ sdiff file1.txt file3.txt 
+First Line							First Line
+Second Line							Second Line
+Third Line							Third Line
+Some								Some
+							      >	thing
+infodba@PravinUbuntu:~$ sdiff file1.txt file3.txt --suppress-common-lines
+							      >	thing
+
+4. vimdiff command:
+-------------------
+It will highlight all differences in vim editor.
+vim editor must be installed when we are using vimdiff.
+
+install vim editor
+infodba@PravinUbuntu:~$ sudo apt install vim
+
+syntax and example:
+-------------------
+vimdiff file1.txt file2.txt
+
+We will see two windows showing the differences.
+ctrl+w+w --> Go to next window
+:q --> To close the current window
+:qa --> To close all windows
+:qa! --> To close all windows forcefully.
+
+5. comm command:
+----------------
+By using this command we can compare data of two files.
+We will see the result in three columns.
+column1 -> Data present only in file1 but not in file2
+column2 -> Data present only in file2 but not in file1
+column3 -> Common data in both files.
+
+syntax and example:
+-------------------
+infodba@PravinUbuntu:~$ comm file1.txt file3.txt 
+                First Line
+                Second Line
+                Third Line
+                Some
+        thing
+infodba@PravinUbuntu:~$ cat file1.txt 
+First Line
+Second Line
+Third Line
+Some
+infodba@PravinUbuntu:~$ cat file3.txt 
+First Line
+Second Line
+Third Line
+Some
+thing
+
+NOTE: The files must be in sorted order to have a proper output using comm command.
+
+Options for comm command:
+-------------------------
+-1 -> If we do not want to display column 1
+-2 -> If we do not want to display column 2
+-3 -> If we do not want to display column 3
+-12 -> If we do not want to display columns 1 and 2
+-13 -> If we do not want to display columns 1 and 3
+-23 -> If we do not want to display columns 2 and 3

@@ -1,0 +1,203 @@
+Link Files:
+-----------
+Link files are nothing but an equivalent of windows desktop shortcuts.
+
+There are two types of link files available in Linux.
+1. Hard Link File
+2. Soft Link File
+
+1. Hard Link File:
+------------------
+Hard link file is just another name of same exact file.
+We can create hard link file using ln command.
+
+Syntax:
+-------
+$ ln original_file_name hard_link_file_name
+
+Example:
+--------
+$ ln file1.txt file1ln.txt
+
+infodba@PravinUbuntu:~$ ln file1.txt file1ln.txt 
+infodba@PravinUbuntu:~$ ls
+file1ln.txt  file1.txt  file2.txt  file3.txt
+infodba@PravinUbuntu:~$ cat file1ln.txt 
+First Line
+Second Line
+Third Line
+Some
+
+This seems like a new file created inside the directory, but the new file1ln.txt file is a link file.
+
+Some important conclusions about link files:
+--------------------------------------------
+l -> long listing
+i -> inode number
+
+1. Both original file and link file has same inode number, same size and same timestamp.
+   infodba@PravinUbuntu:~$ ls -li
+   total 20
+   393248 -rw-rw-r-- 2 infodba infodba   84 Jul 12 21:01 file1ln.txt
+   393248 -rw-rw-r-- 2 infodba infodba   84 Jul 12 21:01 file1.txt
+   
+   The number 2 after permissions shows the links, we have two links original file and hard link file created.
+   
+2. If we perform any changes into the original file then those changes will be reflected to the link file.
+   Similarly if we perform any changes to the link file, then those changes will be reflected to the original file.
+   Now to prove file1.txt and file1ln.txt are same files. Let's update the content and check.
+   Adding a new line in file1ln.txt, Adding line to check hard link file concept.
+   
+   infodba@PravinUbuntu:~$ gedit file1ln.txt 
+   
+   infodba@PravinUbuntu:~$ cat file1.txt 
+   First Line
+   Second Line
+   Third Line
+   Some
+   Adding line to check hard link file concept.
+   
+   infodba@PravinUbuntu:~$ cat file1ln.txt 
+   First Line
+   Second Line
+   Third Line
+   Some
+   Adding line to check hard link file concept.
+
+3. If we remove the original file still link file can be accessible.
+   infodba@PravinUbuntu:~$ rm file1.txt 
+   
+   infodba@PravinUbuntu:~$ ls -li
+   total 16
+   393248 -rw-rw-r-- 1 infodba infodba   84 Jul 12 21:01 file1ln.txt
+   
+   The number 1 after permissions shows the links, currenly only single file remains after file1.txt is deleted.
+   
+   infodba@PravinUbuntu:~$ cat file1ln.txt 
+   First Line
+   Second Line
+   Third Line
+   Some
+   Adding line to check hard link file concept.
+
+2. Soft Link File:
+------------------
+Soft link file is a pointer to another file.
+This is also called as symbolic link, this behaves and is as good as shortcuts in windows.
+
+we can create soft link file by using ln command but with -s option.
+
+Syntax:
+-------
+$ ln -s original_file_name soft_link_file_name
+
+Example:
+--------
+infodba@PravinUbuntu:~$ cat > file1.txt
+Apple
+Banana
+Pineapple
+Mango
+Orange
+infodba@PravinUbuntu:~$ ln -s file1SoftLink.txt
+infodba@PravinUbuntu:~$ ls -li
+total 8
+393244 lrwxrwxrwx 1 infodba infodba   17 Jul 12 21:17 file1SoftLink.txt -> file1SoftLink.txt
+393239 -rw-rw-r-- 1 infodba infodba   36 Jul 12 21:17 file1.txt
+
+Important conclusions about ssoft linkfiles:
+--------------------------------------------
+1. The changes made in the soft link or original file will be reflected in one another.
+2. Original file and soft link file has different inode, timestamp, and sizes
+3. If we delete original file, soft link file will become useless and we can not access that file.
+   infodba@PravinUbuntu:~$  rm file1.txt 
+   infodba@PravinUbuntu:~$ cat file1SoftLink.txt 
+   cat: file1SoftLink.txt: Too many levels of symbolic links
+
+3. Link files for directories
+-----------------------------
+For files we can create soft link and hard links.
+But for directories we can create only softlink but not hard link.
+
+We can not create hardlink for directories because it breaks Linux File System Hierarchy.
+
+Example:
+--------
+infodba@PravinUbuntu:~$  mkdir dir1
+infodba@PravinUbuntu:~$ ln dir1 dir1Ln
+ln: dir1: hard link not allowed for directory
+
+infodba@PravinUbuntu:~$ ln -s dir1 dir1Ln
+infodba@PravinUbuntu:~$ ls
+dir1  dir1Ln
+
+infodba@PravinUbuntu:~$ ls -li
+total 8
+393244 drwxrwxr-x 2 infodba infodba 4096 Jul 12 21:26 dir1
+393245 lrwxrwxrwx 1 infodba infodba    4 Jul 12 21:26 dir1Ln -> dir1
+
+1. Check if the updates are reflectes in the soft link dir
+   infodba@PravinUbuntu:~$ touch dir1/file{1..3}
+   infodba@PravinUbuntu:~$ tree
+   .
+   ├── dir1
+   │   ├── file1
+   │   ├── file2
+   │   └── file3
+   ├── dir1Ln -> dir1
+   
+   infodba@PravinUbuntu:~$ ls dir1Ln
+   file1  file2  file3
+   
+   infodba@PravinUbuntu:~$ tree dir1Ln
+   dir1Ln
+   ├── file1
+   ├── file2
+   └── file3
+
+NOTE: While creating hard link  file make sure to use absolute path.
+
+CASE STUDY:
+-----------
+Assume dir1 contains dir2.
+dir2 contains softlink dir3 pointing to dir1
+
+infodba@PravinUbuntu:~$ mkdir -p dir1/dir2
+infodba@PravinUbuntu:~$ ln -s ~/dir1 ~/dir1/dir2/dir3
+
+NOTE: This is mandatory to use absolute  path
+
+
+ISSUE:
+infodba@PravinUbuntu:~$ ln -s dir1 dir1/dir2/dir3Ln
+infodba@PravinUbuntu:~$ cd dir1/dir2/
+
+infodba@PravinUbuntu:~$ cd dir1/dir2/
+infodba@PravinUbuntu:~/dir1/dir2$ ls
+dir3  dir3Ln
+
+infodba@PravinUbuntu:~/dir1/dir2$ ls -a
+.  ..  dir3  dir3Ln
+
+infodba@PravinUbuntu:~/dir1/dir2$ ls -li
+total 0
+393245 lrwxrwxrwx 1 infodba infodba 18 Jul 12 21:37 dir3 -> /home/infodba/dir1
+393595 lrwxrwxrwx 1 infodba infodba  4 Jul 12 21:40 dir3Ln -> dir1
+
+Here the link created is a broken syslink. Always use absolute path for directory softlink creation.
+
+QUE: Which of the following is valid about hard link?
+a. inode number is different than that of original file.
+b. File size is different than that of original file.
+c. timestamp is different than that of original file.
+d. if we delete original filethen link file will become useless. (VALID)
+e. None of the above
+
+QUE: Which of the following is valid way to create softlink for somthing.jpg present in pictures directory?
+- ln -a !/Pictures/something.jpg somethingLink.jpg
+
+QUE: We can create both hard and soft links for directories.
+- False
+
+QUE: Create hard link of a soft link file is it possible?
+- Even if we try this, system automatically creates a soft link file. Creating hard link file for soft link file is not possible.

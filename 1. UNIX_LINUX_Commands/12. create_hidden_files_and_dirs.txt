@@ -1,0 +1,62 @@
+Creating Hidden Files and Directories:
+
+--------------------------------------
+What is hidden file?
+How we can recognize hidden file?
+----------------------------------
+If any file or directory name starts with '.'. Such file is said to be hidden file.
+
+What is the purpose of hidden file?
+------------------------------------
+This file is internally used by system and noway related to user.
+In normal listing we do not want to display some files, then we go for hidden files.
+Hidden files meant for hidden data. All system files which are internally requited by Kernel are hidden files.
+
+e.g.:
+-----
+.bashrc
+
+How to create a hidden file?
+----------------------------
+We can create hidden files just like normal files, only differenceis file name start with dot (.).
+    infodba@PravinUbuntu:~/Desktop$ touch .securefile.txt
+    
+    infodba@PravinUbuntu:~/Desktop$ ls
+    abc.txt  a.txt
+    
+    infodba@PravinUbuntu:~/Desktop$ ls -a
+    .  ..  abc.txt  a.txt  .securefile.txt
+    
+    infodba@PravinUbuntu:~/Desktop$ cat > .securefile.txt 
+    user=marco
+    pass=polo
+    
+    infodba@PravinUbuntu:~/Desktop$ cat .securefile.txt 
+    user=marco
+    pass=polo
+
+Is it possible to edit a hidden file?
+-------------------------------------
+Yes, just like any other file.
+
+How to create a hidden directories?
+-----------------------------------
+    infodba@PravinUbuntu:~/Desktop$ mkdir .db_info
+    infodba@PravinUbuntu:~/Desktop$ ls -a
+    .  ..  abc.txt  a.txt  .db_info  .securefile.txt
+    
+Interconversion of normal files to hidden files and vice versa, possible?
+-------------------------------------------------------------------------
+Yes, it is possible to convert normal file to a hidden file and a hidden file to a normal file.
+    infodba@PravinUbuntu:~/Desktop$ mv .securefile.txt securefile.txt 
+    
+    infodba@PravinUbuntu:~/Desktop$ ls -a
+    .  ..  abc.txt  a.txt  .db_info  securefile.txt
+    
+    infodba@PravinUbuntu:~/Desktop$ cat securefile.txt 
+    user=marco
+    pass=polo
+
+Similarly, we can also convert normal file into a hidden file.
+This can be also extended to interconvert directories as well.
+

@@ -1,0 +1,135 @@
+Copying of files:
+-----------------
+
+1. infodba@PravinUbuntu:~/Desktop$ cp file1.txt file2.txt
+   Copy file1.txt content to file2.txt
+   If file2.txt is not available then it will be created.
+   If file2.txt is already availbale and contains some data that data will be overwritten.
+   
+   If we want to have the confirmation before overwritting, we should use -i (interactive) )option.
+   
+   If we want verbose output then we have to use -v option.
+   
+2. infodba@PravinUbuntu:~/Desktop$  cp file1.txt file2.txt file3.txt dir1
+   This command will move all the files to directory dir1/
+
+3. infodba@PravinUbuntu:~/Desktop$ cat file1.txt file2.txt file3.txt output.txt
+   This copies the content of multiple provided files to a output file.
+   
+   The below command is invalid, the last  argument for cp if we want to copy multiple files must be a directory.
+   infodba@PravinUbuntu:~/Desktop$ cp file1.txt file2.txt file3.txt output.txt
+
+Moving and Renaming of files and directories:
+---------------------------------------------
+Both moving and renaming activities can be performed by using a single command mv.
+
+1. Renaming of files
+--------------------
+infodba@PravinUbuntu:~/Desktop$ mv file1.txt file2.txt
+file1.txt will be renamed to file2.txt
+
+2. Renaming of dirs
+--------------------
+infodba@PravinUbuntu:~/Desktop$ mv dir1 dir2
+dir1 will be renamed to dir2
+If dir2 is already available then dir1 will be moved to dir2
+
+3. Moving selected files to selected dir
+----------------------------------------
+infodba@PravinUbuntu:~/Desktop$ mv file1.txt file2.txt dir1
+
+4. Moving all files of one dir to another dir
+---------------------------------------------
+infodba@PravinUbuntu:~/Desktop$ mv dir1/* dir2
+
+
+mv file1.txt file2.txt file3.txt dir1
+In this case if the file1.txt file2.txt and file3.txt are already available in dir1.
+The content of the existing files will be overwritten.
+To get the confirmation of overwritting we have to use interactive mode.
+
+CASE STUDY:
+-----------
+
+                                  /home/user
+                                       |
+                      +----------------+----------------+
+                      |                                 |
+                      x                                 Y
+                 +----+----+                     +----+----+
+                 |         |                     |         |
+                x1        x2                    Y1         Y2
+              +--+--+                         +--+--+
+              |     |                         |     |
+            x11    x12                       Y11   Y12
+            
+infodba@PravinUbuntu:~/Desktop$ mkdir -p x/x1/x1{1,2} x/x2 y/y1/y1{1,2} y/y2
+infodba@PravinUbuntu:~/Desktop$ tree
+.
+├── x
+│   ├── x1
+│   │   ├── x11
+│   │   └── x12
+│   └── x2
+└── y
+    ├── y1
+    │   ├── y11
+    │   └── y12
+    └── y2
+
+11 directories, 0 files
+
+REQ 1: Assume file1.txt is available inside x11 directory and we are in user home directory. Copy this file to y2 dir.
+       Using Relative Path
+       -------------------
+       infodba@PravinUbuntu:~$ pwd
+       /home/infodba
+       infodba@PravinUbuntu:~$ cp -i Desktop/x/x1/x11/file1.txt Desktop/y/y2/
+       infodba@PravinUbuntu:~$ tree
+       .
+       ├── Desktop
+       │   ├── x
+       │   │   ├── x1
+       │   │   │   ├── x11
+       │   │   │   │   └── file1.txt
+       │   │   │   └── x12
+       │   │   └── x2
+       │   └── y
+       │       ├── y1
+       │       │   ├── y11
+       │       │   └── y12
+       │       └── y2
+       │           └── file1.txt
+       
+       Using Absolute Path
+       -------------------
+       infodba@PravinUbuntu:~$ cp -i /home/infodba/Desktop/x/x1/x11/file1.txt /home/infodba/Desktop/y/y2/
+       
+       Using tilde symbol
+       ------------------
+       infodba@PravinUbuntu:~$ cp -i ~/Desktop/x/x1/x11/file1.txt ~/Desktop/y/y2/
+
+REQ 2: Assume file1.txt is available in x11 directory and we are in user home directory. Move this file to y11 directory.
+       Using Relative Path
+       -------------------
+       infodba@PravinUbuntu:~$ mv Desktop/x/x1/x11/file1.txt Desktop/y/y1/y11
+       
+       Using Absolute Path
+       -------------------
+       infodba@PravinUbuntu:~$ mv -i /home/infodba/Desktop/x/x1/x11/file1.txt /home/infodba/Desktop/y/y1/y11
+       
+       infodba@PravinUbuntu:~$ tree
+       .
+       ├── Desktop
+       │   ├── x
+       │   │   ├── x1
+       │   │   │   ├── x11
+       │   │   │   └── x12
+       │   │   └── x2
+       │   └── y
+       │       ├── y1
+       │       │   ├── y11
+       │       │   │   └── file1.txt
+       │       │   └── y12
+       │       └── y2
+       │           └── file1.txt
